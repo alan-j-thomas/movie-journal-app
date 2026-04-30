@@ -1,0 +1,47 @@
+/* Add this class to overlay when closing to trigger fade out */
+.chat-overlay-fadeout {
+  animation: fadeOutBg 0.25s forwards;
+}
+
+.chat-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  animation: fadeInBg 0.25s;
+  
+}
+
+@keyframes fadeInBg {
+  from { background: rgba(0,0,0,0); }
+  to { background: rgba(0,0,0,0.35); }
+}
+
+@keyframes fadeOutBg {
+  from { background: rgba(0,0,0,0.35); }
+  to { background: rgba(0,0,0,0); }
+}
+
+
+
+/* .chat-window-animate {
+  animation: slideUpChat 0.35s cubic-bezier(.4,1.6,.6,1) 1;
+  transform-origin: bottom right;
+} */
+
+@keyframes slideUpChat {
+  from {
+    transform: translateY(60px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
