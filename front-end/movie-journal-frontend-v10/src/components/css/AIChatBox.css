@@ -1,0 +1,102 @@
+.ai-chatbox-modal {
+  border: 2px solid #ffd600;
+  border-radius: 16px;
+  padding: 22px;
+  background: #fff;
+  position: fixed;
+  bottom: 120px;
+  right: 32px;
+  z-index: 1001;
+  width: 520px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ai-chatbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ffd600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.ai-chatbox-title {
+  margin: 0;
+  color: #f3cb03;
+  font-weight: 700;
+  font-family: inherit;
+}
+.ai-chatbox-close {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: #ffd600;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+}
+.ai-chatbox-messages {
+  height: 220px;
+  overflow-y: auto;
+  background: #f8f8f8;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  margin: 8px 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ai-chatbox-message {
+  border-radius: 12px;
+  padding: 6px 14px;
+  max-width: 80%;
+  font-weight: 500;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background: #ffd600;
+  align-self: flex-start;
+}
+.ai-chatbox-message.you {
+  background: #cecece;
+  box-shadow: 0 2px 8px rgba(255, 214, 0, 0.1);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  align-self: flex-end;
+}
+.ai-chatbox-message-sender {
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 0px;
+}
+.ai-chatbox-form {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.ai-chatbox-input {
+  flex: 1;
+  border: 1.5px solid #ffd600;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 15px;
+  outline: none;
+  background: #fff;
+  color: #222;
+}
+.ai-chatbox-send {
+  background: #ffd600;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  padding: 8px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-shadow: 0 2px 8px rgba(255, 214, 0, 0.1);
+}
