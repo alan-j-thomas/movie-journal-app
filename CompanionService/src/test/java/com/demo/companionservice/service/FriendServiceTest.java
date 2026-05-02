@@ -9,6 +9,7 @@ import java.util.Optional;
 import com.demo.companionservice.entity.Friend;
 import com.demo.companionservice.entity.Status;
 import com.demo.companionservice.exception.RequestNotFoundException;
+import com.demo.companionservice.producer.RabbitMQProducer;
 import com.demo.companionservice.repository.FriendRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,9 @@ class FriendServiceTest {
 
     @Mock
     private FriendRepository friendRepository;
+
+    @Mock
+    private RabbitMQProducer producer;
 
     @InjectMocks
     private FriendService friendService;

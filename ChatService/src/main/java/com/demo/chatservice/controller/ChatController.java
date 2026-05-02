@@ -90,6 +90,14 @@ public class ChatController {
             chatMessage
         );
     }
+
+	private String handleWatchlistRequest(String userEmail) {
+		return handleWatchlistRequestWithRetry(userEmail);
+	}
+
+	private String handleRecommendationRequest(String userEmail, String originalRequest) {
+		return handleRecommendationRequestWithRetry(userEmail, originalRequest);
+	}
     
     private void handleAIRequest(ChatMessage aiRequest) {
     	// Create a proper AI request message to display
@@ -245,7 +253,7 @@ public class ChatController {
     			}
     		}
     	}
-    	return "Sorry, I couldn't retrieve your watchlist after multiple attempts.";
+		return "Sorry, I couldn't retrieve your watchlist at the moment.";
     }
     
     private String handleRecommendationRequestWithRetry(String userEmail, String originalRequest) {
@@ -283,7 +291,7 @@ public class ChatController {
     			}
     		}
     	}
-    	return "Sorry, I couldn't generate recommendations after multiple attempts.";
+		return "Sorry, I couldn't generate recommendations at the moment.";
     }
     
     private List<MovieDTO> getDatabaseRecommendations(List<WatchlistMovieDTO> watchlist) {
