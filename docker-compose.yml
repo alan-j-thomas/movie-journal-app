@@ -1,0 +1,200 @@
+version: '3.8'
+
+services:
+
+  # Eureka
+  service-registry:
+    image: alnwalker/serviceregistry
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+
+  # ================= DATABASES =================
+
+  user-db:
+    image: mysql:8
+    container_name: user-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_db
+    ports:
+      - "3307:3306"
+
+  movie-db:
+    image: mysql:8
+    container_name: movie-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: movie_db
+    ports:
+      - "3308:3306"
+
+  watchlist-db:
+    image: mysql:8
+    container_name: watchlist-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: watchlist_db
+    ports:
+      - "3309:3306"
+
+  journal-db:
+    image: mysql:8
+    container_name: journal-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: journal_db
+    ports:
+      - "3310:3306"
+  
+  notification-db:
+    image: mysql:8
+    container_name: notification-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: notification_db
+    ports:
+      - "3311:3306"
+  
+  companion-db:
+    image: mysql:8
+    container_name: companion-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: companion_db
+    ports:
+      - "3312:3306"
+
+  chat-db:
+    image: mysql:8
+    container_name: chat-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chat_db
+    ports:
+      - "3313:3306"
+
+  auth-db:
+      image: mysql:8
+      container_name: auth-db
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: auth_db
+      ports:
+        - "3314:3306"
+  # ================= SERVICES =================
+
+  user-service:
+    image: alnwalker/userservice
+    depends_on:
+      - user-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://user-db:3306/user_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+
+  movie-service:
+    image: alnwalker/movieservice
+    depends_on:
+      - movie-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://movie-db:3306/movie_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+
+  watchlist-service:
+    image: alnwalker/watchlistservice
+    depends_on:
+      - watchlist-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://watchlist-db:3306/watchlist_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+
+  journal-service:
+    image: alnwalker/journalservice
+    depends_on:
+      - journal-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://journal-db:3306/journal_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+  
+  notification-service:
+    image: alnwalker/notificationservice
+    depends_on:
+      - notification-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://notification-db:3306/notification_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+
+  companion-service:
+    image: alnwalker/companionservice
+    depends_on:
+      - companion-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://companion-db:3306/companion_db
+      SPRING_DATASOURCE_USERNAME: root  
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+  
+  chat-service:
+    image: alnwalker/chatservice
+    depends_on:
+      - chat-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://chat-db:3306/chat_db
+      SPRING_DATASOURCE_USERNAME: root  
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+
+  auth-service:
+    image: alnwalker/authservice
+    depends_on:
+      - auth-db
+      - service-registry
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://auth-db:3306/auth_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+  
+  ai-service:
+    image: alnwalker/aiservice
+    depends_on:
+      - service-registry
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+
+  # ================= GATEWAY =================
+
+  api-gateway:
+    image: alnwalker/gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-registry
+      - user-service
+      - movie-service
+      - watchlist-service
+      - journal-service
+      - notification-service
+      - companion-service
+      - chat-service
+      - auth-service
+      - ai-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
