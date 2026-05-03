@@ -16,17 +16,17 @@ pipeline {
         stage('Build JARs') {
             steps {
                 sh '''
-                cd UserService && mvn clean package -DskipTests
-                cd ../MovieService && mvn clean package -DskipTests
-                cd ../WatchlistService && mvn clean package -DskipTests
-                cd ../JournalService && mvn clean package -DskipTests
-                cd ../AuthenticationService && mvn clean package -DskipTests
-                cd ../NotificationService && mvn clean package -DskipTests
-                cd ../CompanionService && mvn clean package -DskipTests
-                cd ../AI-Service && mvn clean package -DskipTests
-                cd ../ChatService && mvn clean package -DskipTests
-                cd ../ApiGateway && mvn clean package -DskipTests
-                cd ../ServiceRegistry && mvn clean package -DskipTests
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f UserService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f MovieService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f WatchlistService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f JournalService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f AuthenticationService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f NotificationService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f CompanionService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f AI-Service/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f ChatService/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f ApiGateway/pom.xml
+                docker run --rm -v $PWD:/app -w /app maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests -f ServiceRegistry/pom.xml
                 '''
             }
         }
