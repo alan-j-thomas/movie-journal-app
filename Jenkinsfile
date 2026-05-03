@@ -16,7 +16,7 @@ pipeline {
         stage('Build JARs') {
             steps {
                 sh '''
-                cd ../UserService && mvn clean package -DskipTests
+                cd UserService && mvn clean package -DskipTests
                 cd ../MovieService && mvn clean package -DskipTests
                 cd ../WatchlistService && mvn clean package -DskipTests
                 cd ../JournalService && mvn clean package -DskipTests
