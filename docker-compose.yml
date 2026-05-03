@@ -1,10 +1,9 @@
-version: '3.8'
 
 services:
 
   # Eureka
   service-registry:
-    image: alnwalker/serviceregistry
+    image: alnwalker/service-registry
     container_name: service-registry
     ports:
       - "8761:8761"
@@ -85,7 +84,7 @@ services:
   # ================= SERVICES =================
 
   user-service:
-    image: alnwalker/userservice
+    image: alnwalker/user-service
     depends_on:
       - user-db
       - service-registry
@@ -96,7 +95,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
 
   movie-service:
-    image: alnwalker/movieservice
+    image: alnwalker/movie-service
     depends_on:
       - movie-db
       - service-registry
@@ -107,7 +106,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
 
   watchlist-service:
-    image: alnwalker/watchlistservice
+    image: alnwalker/watchlist-service
     depends_on:
       - watchlist-db
       - service-registry
@@ -118,7 +117,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
 
   journal-service:
-    image: alnwalker/journalservice
+    image: alnwalker/journal-service
     depends_on:
       - journal-db
       - service-registry
@@ -129,7 +128,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
   
   notification-service:
-    image: alnwalker/notificationservice
+    image: alnwalker/notification-service
     depends_on:
       - notification-db
       - service-registry
@@ -140,7 +139,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
 
   companion-service:
-    image: alnwalker/companionservice
+    image: alnwalker/companion-service
     depends_on:
       - companion-db
       - service-registry
@@ -151,7 +150,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
   
   chat-service:
-    image: alnwalker/chatservice
+    image: alnwalker/chat-service
     depends_on:
       - chat-db
       - service-registry
@@ -162,7 +161,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
 
   auth-service:
-    image: alnwalker/authservice
+    image: alnwalker/auth-service
     depends_on:
       - auth-db
       - service-registry
@@ -173,7 +172,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
   
   ai-service:
-    image: alnwalker/aiservice
+    image: alnwalker/ai-service
     depends_on:
       - service-registry
     environment:
@@ -182,9 +181,9 @@ services:
   # ================= GATEWAY =================
 
   api-gateway:
-    image: alnwalker/gateway
+    image: alnwalker/api-gateway
     ports:
-      - "8080:8080"
+      - "9090:9090"
     depends_on:
       - service-registry
       - user-service
