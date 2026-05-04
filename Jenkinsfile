@@ -16,17 +16,17 @@ pipeline {
         stage('Build JARs') {
             steps {
                 sh '''
-                docker run --rm -v $(pwd):/app -w /app/UserService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/MovieService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/WatchlistService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/JournalService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/AuthenticationService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/NotificationService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/CompanionService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/AI-Service maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/ChatService maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/ApiGateway maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
-                docker run --rm -v $(pwd):/app -w /app/ServiceRegistry maven:3.9-eclipse-temurin-21 mvn clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/UserService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/MovieService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/WatchlistService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/JournalService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/AuthenticationService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/NotificationService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/CompanionService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/AI-Service/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/ChatService/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/ApiGateway/pom.xml clean package -DskipTests
+                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/ServiceRegistry/pom.xml clean package -DskipTests
                 '''
             }
         }
