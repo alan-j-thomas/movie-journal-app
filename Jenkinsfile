@@ -16,17 +16,17 @@ pipeline {
         stage('Build JARs') {
             steps {
                 sh '''
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/UserService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/MovieService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/WatchlistService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/JournalService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/AuthenticationService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/NotificationService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/CompanionService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/AI-Service/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/ChatService/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/ApiGateway/pom.xml clean package -DskipTests
-                docker run --rm -v /var/jenkins_home/workspace/movie-journal-pipeline:/app maven:3.9-eclipse-temurin-21 mvn -f /app/ServiceRegistry/pom.xml clean package -DskipTests
+                cd UserService && mvn clean package -DskipTests
+                cd ../MovieService && mvn clean package -DskipTests
+                cd ../WatchlistService && mvn clean package -DskipTests
+                cd ../JournalService && mvn clean package -DskipTests
+                cd ../AuthenticationService && mvn clean package -DskipTests
+                cd ../NotificationService && mvn clean package -DskipTests
+                cd ../CompanionService && mvn clean package -DskipTests
+                cd ../AI-Service && mvn clean package -DskipTests
+                cd ../ChatService && mvn clean package -DskipTests
+                cd ../ApiGateway && mvn clean package -DskipTests
+                cd ../ServiceRegistry && mvn clean package -DskipTests
                 '''
             }
         }
