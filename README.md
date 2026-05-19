@@ -102,17 +102,6 @@ All services are containerized using Docker.
 docker-compose up -d
 ```
 
----
-
-## 🔍 Access Services
-
-| Service          | URL                   |
-| ---------------- | --------------------- |
-| API Gateway      | http://localhost:8080 |
-| Eureka Dashboard | http://localhost:8761 |
-
----
-
 ## 🔄 CI/CD Pipeline
 
 Automated pipeline using Jenkins:
